@@ -42,9 +42,9 @@ jobs:
         run: |
           cd build
       - name: "run cmake "
-        run: cmake --build --targets sphinx
+        run: cmake ..
       - name: "run make " 
-        run: make 
+        run: cmake  --target sphinx
       
       - name: Deploy Docs 
         uses: JamesIves/github-pages-deploy-action@v4
