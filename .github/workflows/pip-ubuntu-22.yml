@@ -35,31 +35,16 @@ jobs:
       - name: Add python requirements
         run: python -m pip install --upgrade wheel setuptools && python -m pip install -r requirements.txt
 
-      - name: Build and install
-        run: pip install --verbose .
-
-      - uses: ammaraskar/sphinx-action@master
-        with:
-          docs-folder: "doc/"
-          build-command: "sphinx-build -b html . _build"
-      # Publish built docs to gh-pages branch.
-      # ===============================
-      - name: Commit documentation changes
+      - name: "create and enter build dir"
         run: |
-            git clone https://github.com/jbpezent/depreltest.git --branch gh-pages --single-branch gh-pages
-            cp -r doc/_build/html/* gh-pages/
-            cd gh-pages
-            touch .nojekyll
-            git config --local user.email "action@github.com"
-            git config --local user.name "GitHub Action"
-            git add .
-            git commit -m "Update documentation" -a || true
-            # The above command will fail if no changes were present, so we ignore
-            # that.
-      - name: Push changes
-        uses: ad-m/github-push-action@master
+          mkdir build
+          cd build
+      - name: "run cmake "
+        run: cmake --build sphinx
+      - name: "run make " 
+        run: make 
+      - name: Deploy Docs 
+        uses: JamesIves/github-pages-deploy-action@v4
         with:
-          branch: gh-pages
-          directory: gh-pages
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-    # ===============================
+          folder: build/doc/sphinx # The folder the action should deploy
+    
