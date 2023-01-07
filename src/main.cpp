@@ -1,14 +1,8 @@
 #include "pch.h"
-#include "OptimalControl/ASSET_OptimalControl.h"
-#include "VectorFunctions/ASSET_VectorFunctions.h"
-#include "Solvers/ASSET_Solvers.h"
-#include "Utils/ASSET_Utils.h"
-#include "Astro/ASSET_Astro.h"
+
 #include <signal.h>
+#include "mkl.h"
 
-
-using namespace ASSET;
-using namespace rubber_types;
 
 
 ////////////////////////////////////////////////////////////////////////////
@@ -17,15 +11,14 @@ using namespace rubber_types;
 void SoftwareInfo() {
     
     
-   
+    int DSECOND = dsecnd();
 
     int tcount = std::thread::hardware_concurrency();
-    int ccount = ASSET::get_core_count();
-    int vsize = ASSET::DefaultSuperScalar::SizeAtCompileTime;
+    int ccount = std::thread::hardware_concurrency();
+    int vsize = 4;
 
 
     
-
 
     std::string assetversion = std::string(ASSET_VERSIONSTRING);
     std::string osversion = std::string(ASSET_OS) + " " + std::string(ASSET_OSVERSION);
@@ -44,34 +37,7 @@ void SoftwareInfo() {
     
 
     
-    std::string ASSET_STR(
-        "         ___    _____   _____    ______  ______ \n"
-        "        /   |  / ___/  / ___/   / ____/ /_  __/    \n"
-        "       / /| |  \\__ \\   \\__ \\   / __/     / /        \n"
-        "      / ___ | ___/ /  ___/ /  / /___    / /      \n"
-        "     /_/  |_|/____/  /____/  /_____/   /_/     \n\n");
-
-
-    fmt::print(fmt::fg(fmt::color::white), "{0:=^{1}}\n", "", 79);
-    fmt::print(fmt::fg(fmt::color::crimson), ASSET_STR);
-    fmt::print(fmt::fg(fmt::color::crimson), " Astrodynamics Software and Science Enabling Toolkit\n");
-    fmt::print(fmt::fg(fmt::color::white), "{0:=^{1}}\n", "", 79);
-    fmt::print(fmt::fg(fmt::color::white), "\nDevelopment funded by NASA under Grant No. 80NSSC19K1643\n\n");
-
-
-    fmt::print(fmt::fg(fmt::color::royal_blue), " Senior Personnel:\n");
-    fmt::print(fmt::fg(fmt::color::white), "  Rohan Sood            rsood@eng.ua.edu                PI\n");
-    fmt::print(fmt::fg(fmt::color::white), "  Kathleen Howell       howell@purdue.edu               Co-I\n");
-    fmt::print(fmt::fg(fmt::color::white), "  Jeff Stuart           jeffrey.r.stuart@jpl.nasa.gov   Co-I\n");
-
-
-    fmt::print(fmt::fg(fmt::color::royal_blue), " Student Contributors:\n");
-    fmt::print(fmt::fg(fmt::color::white),      "  James B. Pezent       jbpezent@crimson.ua.edu         Lead Developer\n");
-    fmt::print(fmt::fg(fmt::color::white),      "  Jared D. Sikes        jdsikes1@crimson.ua.edu         Developer\n");
-    fmt::print(fmt::fg(fmt::color::white),      "  William G. Ledbetter  wgledbetter@crimson.ua.edu      Developer\n");
-    fmt::print(fmt::fg(fmt::color::white),      "  Carrie G. Sandel      cgsandel@crimson.ua.edu         Developer\n");
-
-
+    
     
     fmt::print(fmt::fg(fmt::color::white), "{0:=^{1}}\n\n", "", 79);
     fmt::print(fmt::fg(fmt::color::royal_blue), " Software Version     : "); fmt::print(fmt::fg(fmt::color::white), assetversion); fmt::print("\n");
@@ -99,40 +65,24 @@ void signal_callback(int sig) {
 }
 
 int main() {
-    using std::cin;
-    using std::cout;
-    using std::endl;
-
-    
-
-    ASSET::enable_color_console();
-
-    signal(SIGINT, signal_callback);
-
-    SoftwareInfo();
+   
 
     return 0;
 }
 
 
 
-PYBIND11_MODULE(asset, m) {
+PYBIND11_MODULE(_depreltest, m) {
 
-  ASSET::enable_color_console();//This only does something on windows
 
   signal(SIGINT, signal_callback);
 
-  m.doc() = "ASSET";  // optional module docstring
+  m.doc() = "DEPRELTEST";  // optional module docstring
   m.def("PyMain", &main);
   m.def("SoftwareInfo", &SoftwareInfo);
 
 
-  FunctionRegistry reg(m);     // Must be built first
-  VectorFunctionBuild(reg, m); // Must be built second
-  SolversBuild(reg,m);         // Builds Third so that PSIOPT shows up better in autocomplete
-  OptimalControlBuild(reg, m);
-  UtilsBuild(m);
-  AstroBuild(reg, m);
+  
 
   
 }

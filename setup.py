@@ -50,7 +50,7 @@ class CMakeBuild(build_ext):
             "-DPYTHON_EXECUTABLE=" + sys.executable,
             "-DPIP_INSTALL=True",
         ]
-        build_args = ["--target", "asset"]
+        build_args = ["--target", "_depreltest"]
 
         cfg = "Debug" if self.debug else "Release"
         build_args += ["--config", cfg]
@@ -87,12 +87,12 @@ class CMakeBuild(build_ext):
 
 
 setup(
-    name="asset",
+    name="depreltest",
     version="0.0.1",
     author="Alabama ASRL",
     description="High-speed, extensible, object-oriented trajectory design and optimization",
     long_description="",
-    ext_modules=[CMakeExtension("asset")],
+    ext_modules=[CMakeExtension("_depreltest")],
     cmdclass=dict(build_ext=CMakeBuild),
     zip_safe=False,
 )
