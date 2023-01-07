@@ -14,3 +14,12 @@ Indices and tables
 * :ref:`genindex`
 * :ref:`modindex`
 * :ref:`search`
+
+Read Binary
+===========
+
+.. automodule:: _depreltest
+    :members:
+    :undoc-members:
+    :special-members:
+    :show-inheritance:
