@@ -38,13 +38,10 @@ jobs:
       - name: Build and install
         run: pip install --verbose .
       
-      - name: "create and enter build dir"
-        run: |
-          cd build
-      - name: "run cmake "
-        run: cmake ..
-      - name: "run make " 
-        run: cmake  --target sphinx
+      - name: "Create build directory and run CMake"
+        run: cmake -S .  -G "Unix Makefiles" -DCMAKE_BUILD_TYPE=Release
+      - name: "Build Project" 
+        run: cmake --build build --target all --config Release -- -j1 
       
       - name: Deploy Docs 
         uses: JamesIves/github-pages-deploy-action@v4
