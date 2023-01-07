@@ -40,7 +40,6 @@ jobs:
       
       - name: "create and enter build dir"
         run: |
-          mkdir build
           cd build
       - name: "run cmake "
         run: cmake --build --targets sphinx
