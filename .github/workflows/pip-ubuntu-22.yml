@@ -35,16 +35,19 @@ jobs:
       - name: Add python requirements
         run: python -m pip install --upgrade wheel setuptools && python -m pip install -r requirements.txt
 
+      - name: Build and install
+        run: pip install --verbose .
+      
       - name: "create and enter build dir"
         run: |
           mkdir build
           cd build
       - name: "run cmake "
-        run: cmake --build sphinx
+        run: cmake --build --targets sphinx
       - name: "run make " 
         run: make 
+      
       - name: Deploy Docs 
         uses: JamesIves/github-pages-deploy-action@v4
         with:
-          folder: build/doc/sphinx # The folder the action should deploy
-    
+          folder: build/temp.linux-x86_64-cpython-39/doc/sphinx # The folder the action should deploy
