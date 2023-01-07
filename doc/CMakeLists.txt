@@ -64,6 +64,8 @@ message(STATUS ${BINARY_BUILD_DIR})
 
 message(STATUS ${PROJECT_SOURCE_DIR})
 
+message(STATUS ${SPHINX_BUILD})
+
 message(STATUS ${PROJECT_NAME})
 
 # Run Sphinx

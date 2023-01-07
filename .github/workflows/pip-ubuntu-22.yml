@@ -40,4 +40,4 @@ jobs:
       - name: Deploy Docs 
         uses: JamesIves/github-pages-deploy-action@v4
         with:
-          folder: build/doc/sphinx # The folder the action should deploy
+          folder: build/temp.linux-x86_64-cpython-39/doc/ # The folder the action should deploy
