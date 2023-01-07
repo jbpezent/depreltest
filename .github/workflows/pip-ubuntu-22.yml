@@ -37,3 +37,7 @@ jobs:
 
       - name: Build and install
         run: pip install --verbose .
+      - name: Deploy Docs 
+        uses: JamesIves/github-pages-deploy-action@v4
+        with:
+          folder: build/doc/sphinx # The folder the action should deploy
