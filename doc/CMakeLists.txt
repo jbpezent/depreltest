@@ -49,6 +49,11 @@ set(BINARY_BUILD_DIR "${CMAKE_CURRENT_BINARY_DIR}/_build")
 # Sphinx cache with pickled ReST documents
 set(SPHINX_CACHE_DIR "${CMAKE_CURRENT_BINARY_DIR}/_doctrees")
 
+file(COPY "${CMAKE_CURRENT_SOURCE_DIR}/.nojekyll"
+DESTINATION  "${SPHINX_BUILD}/")
+
+
+
 configure_file(
     "${CMAKE_CURRENT_SOURCE_DIR}/conf.py.in"
     "${BINARY_BUILD_DIR}/conf.py"

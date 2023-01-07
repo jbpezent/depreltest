@@ -50,7 +50,7 @@ class CMakeBuild(build_ext):
             "-DPYTHON_EXECUTABLE=" + sys.executable,
             "-DPIP_INSTALL=True",
         ]
-        build_args = ["--target", "_depreltest"]
+        build_args = ["--target", "_depreltest sphinx"]
 
         cfg = "Debug" if self.debug else "Release"
         build_args += ["--config", cfg]
