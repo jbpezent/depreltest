@@ -8,19 +8,13 @@ set(ASSET_INCLUDES
 
 #-------------------------------------------------------------------------------
 ## PCH
-add_library(pch STATIC pch.h pch.cpp  )
-target_precompile_headers(pch PRIVATE pch.h) 
 
-target_include_directories(pch PRIVATE ${INCLUDE_DIRS})
-#target_link_libraries(pch PRIVATE fmt::fmt-header-only)
-target_compile_options(pch PUBLIC ${COMPILE_FLAGS})
 #-------------------------------------------------------------------------------
 ## ASSET Python Module
 pybind11_add_module(_depreltest main.cpp )
 
 
 target_compile_options(_depreltest PUBLIC  ${COMPILE_FLAGS})
-target_precompile_headers(_depreltest REUSE_FROM pch)
 target_include_directories(_depreltest PRIVATE ${INCLUDE_DIRS})
 target_link_libraries(_depreltest PRIVATE ${LINK_LIBS})
 
