@@ -256,6 +256,16 @@ if(NOT PIP_INSTALL)
   endif()
 endif()
 
+message(STATUS "" ,${Python_STDLIB})
+message(STATUS "" ,${Python_SITELIB})
+message(STATUS "" ,${Python_SITEARCH})
+message(STATUS "" ,${Python_STDARCH})
+message(STATUS "" ,${Python_EXECUTABLE})
+message(STATUS "" ,${Python_LIBRARIES})
+message(STATUS "" ,${Python_LIBRARY_DIRS})
+message(STATUS "" ,${Python_RUNTIME_LIBRARY_DIRS})
+
+
 message(STATUS "CMAKE DIR LOC" ${CMAKE_CURRENT_SOURCE_DIR})
 message(STATUS ${OpenMP_CXX_FLAGS})
 message(STATUS ${OpenMP_CXX_LIBRARIES})
