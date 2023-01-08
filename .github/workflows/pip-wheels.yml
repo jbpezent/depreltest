@@ -1,4 +1,4 @@
-name: pip-ubuntu-22
+name: pip-wheels
 
 on:
   schedule:
