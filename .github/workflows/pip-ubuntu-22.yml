@@ -39,9 +39,9 @@ jobs:
         run: pip install --verbose .
       
       - name: "Create build directory and run CMake"
-        run: cmake -S . -B build -G "Unix Makefiles" -DCMAKE_BUILD_TYPE=Release
+        run: cmake -S . -B build -G "Unix Makefiles" -DCMAKE_BUILD_TYPE=Release -DPIP_INSTALL=True
       - name: "Build Project" 
-        run: cmake --build build --target all --config Release -- -j1 
+        run: cmake --build build --target sphinx --config Release -- -j1 
       
       - name: Deploy Docs 
         uses: JamesIves/github-pages-deploy-action@v4
