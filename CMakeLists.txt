@@ -278,6 +278,8 @@ add_subdirectory(src)
 # READ: pip install sphinx,breathe,furo before trying to build docs
 add_subdirectory(doc)
 
+add_subdirectory(pypiwheel)
+
 # Formatting
 include(cmake/clang-format.cmake)
 

@@ -3,7 +3,7 @@
 #include <signal.h>
 #include "mkl.h"
 
-
+#include "PardisoInterface.h"
 
 ////////////////////////////////////////////////////////////////////////////
 
@@ -66,6 +66,10 @@ void signal_callback(int sig) {
 
 int main() {
    
+
+    Eigen::PardisoLDLT<Eigen::SparseMatrix<double, Eigen::RowMajor>> m;
+
+    
 
     return 0;
 }
