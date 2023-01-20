@@ -45,5 +45,5 @@ jobs:
         uses: actions/upload-artifact@v3
         with:
           name: dist
-          path: build/doc/pypiwheel/depreltest/dist
+          path: build/pypiwheel/depreltest/dist
           retention-days: 5
