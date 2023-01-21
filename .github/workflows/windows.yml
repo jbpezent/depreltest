@@ -48,6 +48,10 @@ jobs:
     #    shell: bash
     steps:
 
+      - name: Install LLVM and Clang
+        uses: KyleMayes/install-llvm-action@v1
+        with:
+         version: "14.0"
       
       - uses: actions/checkout@v3
         with:
@@ -68,7 +72,7 @@ jobs:
       - name: "Create build directory and run CMake"
         
         #run: cmake -S . -B build -G "Visual Studio 17 2022" -T "ClangCl" -DCMAKE_BUILD_TYPE=Release -DPIP_INSTALL=True
-        run: cmake -S . -B build -G "Ninja" -DCMAKE_BUILD_TYPE=Release -DPIP_INSTALL=True -DCMAKE_C_COMPILER:FILEPATH="C:/Program Files/Microsoft Visual Studio/2022/Enterprise/VC/Tools/Llvm/bin/clang-cl.exe" -DCMAKE_CXX_COMPILER:FILEPATH="C:/Program Files/Microsoft Visual Studio/2022/Enterprise/VC/Tools/Llvm/bin/clang-cl.exe" -DCMAKE_LINKER:FILEPATH="C:/Program Files/Microsoft Visual Studio/2022/Enterprise/VC/Tools/Llvm/bin/lld-link.exe" 
+        run: cmake -S . -B build -G "Ninja" -DCMAKE_BUILD_TYPE=Release -DPIP_INSTALL=True -DCMAKE_C_COMPILER:FILEPATH="C:/Program Files/LLVM/bin/clang-cl.exe" -DCMAKE_CXX_COMPILER:FILEPATH="C:/Program Files/LLVM/bin/clang-cl.exe" -DCMAKE_LINKER:FILEPATH="C:/Program Files/LLVM/bin/lld-link.exe" 
       
       - name: "Build Project" 
         run: cmake --build build --target _depreltest pypiwheel --config Release 
