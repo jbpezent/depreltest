@@ -1,0 +1,55 @@
+name: pypi-windows
+
+
+on:
+  workflow_dispatch:
+
+jobs:
+ build:
+    strategy:
+       fail-fast: false
+       matrix:
+        platform: [windows-latest]
+        python-version: ["3.8","3.9"]
+        compiler: ["clang-cl"]
+
+    runs-on: ${{ matrix.platform }}
+
+    steps:
+
+      
+      - uses: actions/checkout@v3
+        with:
+          submodules: true
+
+      #- uses: ilammy/msvc-dev-cmd@v1
+      #  with:
+      #    arch: x86_64
+
+      - name: 'Upload Test'
+        uses: actions/upload-artifact@v3
+        with:
+          name: dist ${{ matrix.python-version }}
+          path: src/main.cpp
+          retention-days: 1
+
+ upload:
+    strategy:
+       fail-fast: false
+       matrix:
+        platform: [ubuntu-latest]
+        python-version: ["3.9"]
+        compiler: ["clang-13"]
+    runs-on: ${{ matrix.platform }}
+
+    steps:
+        - uses: actions/checkout@v3
+
+        - uses: actions/download-artifact@v3
+          with:
+              path: wheels/
+
+
+        - name: Display structure of downloaded files
+          run: ls -R
+          working-directory:  wheels/
