@@ -61,6 +61,7 @@ jobs:
           arch: x86_64
       - name: install mkl
         run: scripts/windowsoneapi_install.bat $WINDOWS_BASEKIT_URL $WINDOWS_CPP_COMPONENTS
+        shell: bash
 
       - uses: actions/setup-python@v3
         with:
