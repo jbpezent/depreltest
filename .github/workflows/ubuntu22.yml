@@ -1,8 +1,7 @@
 name: ubuntu22
 
 on:
-  schedule:
-    - cron: "0 20 * * 5"
+  workflow_dispatch:
  # push:
  #   branches:
  #     - main
@@ -44,6 +43,12 @@ jobs:
       - name: 'Upload Artifact'
         uses: actions/upload-artifact@v3
         with:
-          name: dist ${{ matrix.python-version }}
+          name: dist ${{ matrix.python-version }} ${{ matrix.platform }}
           path: build/pypiwheel/depreltest/dist
-          retention-days: 5
+          retention-days: 1
+      - name: Publish package to TestPyPI
+        uses: pypa/gh-action-pypi-publish@release/v1
+        with:
+          password: ${{ secrets.TEST_PYPI_API_TOKEN }}
+          repository_url: https://test.pypi.org/simple/
+          packages_dir: build/pypiwheel/depreltest/dist
