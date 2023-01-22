@@ -34,11 +34,12 @@ jobs:
         shell: bash
     steps:
 
-      - name: install mkl
-        run: scripts/windowsoneapi_install.bat $WINDOWS_BASEKIT_URL $WINDOWS_CPP_COMPONENTS
+      
       - uses: actions/checkout@v3
         with:
           submodules: true
+      - name: install mkl
+        run: scripts/windowsoneapi_install.bat $WINDOWS_BASEKIT_URL $WINDOWS_CPP_COMPONENTS
 
       - uses: actions/setup-python@v3
         with:
