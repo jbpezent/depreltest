@@ -54,7 +54,7 @@ jobs:
           submodules: true
       - uses: ilammy/msvc-dev-cmd@v1
         with:
-          arch: amd64
+          arch: x86
       #- name: install mkl
       #  run: scripts/windowsoneapi_install.bat $WINDOWS_BASEKIT_URL $WINDOWS_CPP_COMPONENTS
 
