@@ -29,7 +29,9 @@ jobs:
         compiler: ["clang-cl"]
 
     runs-on: ${{ matrix.platform }}
-
+    defaults:
+      run:
+        shell: bash
     steps:
 
       - name: install mkl
