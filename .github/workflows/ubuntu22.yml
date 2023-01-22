@@ -3,9 +3,9 @@ name: ubuntu22
 on:
   schedule:
     - cron: "0 20 * * 5"
-  push:
-    branches:
-      - main
+ # push:
+ #   branches:
+ #     - main
 
 jobs:
   build:
