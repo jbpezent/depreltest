@@ -22,14 +22,14 @@ env:
   v1: -DCMAKE_BUILD_TYPE=Release 
   v2: -DPIP_INSTALL=True 
   v3: -DBUILD_SPHINX_DOCS=True 
-  v4: -DCMAKE_C_COMPILER=C:/Program Files/LLVM/bin/clang-cl.exe 
-  v5: -DCMAKE_C_COMPILER=C:/Program Files/LLVM/bin/clang-cl.exe 
-  v6: -DCMAKE_CXX_COMPILER=C:/Program Files/LLVM/bin/clang-cl.exe 
-  v7: -DCMAKE_LINKER=C:/Program Files/LLVM/bin/lld-link.exe 
-  v8: -DCMAKE_CXX_COMPILER_RANLIB=C:/Program Files/LLVM/bin/llvm-ranlib.exe 
-  v9: -DCMAKE_CXX_COMPILER_AR=C:/Program Files/LLVM/bin/llvm-ar.exe
-  v10: -DCMAKE_C_COMPILER_RANLIB=C:/Program Files/LLVM/bin/llvm-ranlib.exe
-  v11: -DCMAKE_C_COMPILER_AR=C:/Program Files/LLVM/bin/llvm-ar.exe
+  v4: '-DCMAKE_C_COMPILER=C:/Program Files/LLVM/bin/clang-cl.exe' 
+  v5: '-DCMAKE_C_COMPILER=C:/Program Files/LLVM/bin/clang-cl.exe'
+  v6: '-DCMAKE_CXX_COMPILER=C:/Program Files/LLVM/bin/clang-cl.exe' 
+  v7: '-DCMAKE_LINKER=C:/Program Files/LLVM/bin/lld-link.exe' 
+  v8: '-DCMAKE_CXX_COMPILER_RANLIB=C:/Program Files/LLVM/bin/llvm-ranlib.exe' 
+  v9: '-DCMAKE_CXX_COMPILER_AR=C:/Program Files/LLVM/bin/llvm-ar.exe'
+  v10: '-DCMAKE_C_COMPILER_RANLIB=C:/Program Files/LLVM/bin/llvm-ranlib.exe'
+  v11: '-DCMAKE_C_COMPILER_AR=C:/Program Files/LLVM/bin/llvm-ar.exe'
 
 jobs:
   build:
@@ -41,15 +41,18 @@ jobs:
         compiler: ["clang-cl"]
 
     runs-on: ${{ matrix.platform }}
-    defaults:
-      run:
-        shell: bash
+    #defaults:
+    #  run:
+    #    shell: bash
     steps:
 
       
       - uses: actions/checkout@v3
         with:
           submodules: true
+      - uses: ilammy/msvc-dev-cmd@v1
+        with:
+          arch: amd64
       #- name: install mkl
       #  run: scripts/windowsoneapi_install.bat $WINDOWS_BASEKIT_URL $WINDOWS_CPP_COMPONENTS
 
