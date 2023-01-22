@@ -32,7 +32,7 @@ jobs:
       - name: 'Upload Test'
         uses: actions/upload-artifact@v3
         with:
-          name: dist ${{ matrix.python-version }}
+          name: dist_${{ matrix.python-version }}
           path: src/main.cpp${{ matrix.python-version }}
           retention-days: 1
 
@@ -47,10 +47,18 @@ jobs:
     runs-on: ${{ matrix.platform }}
 
     steps:
+        - uses: actions/checkout@v3
 
-        #- name: Make Wheel Directory
-        #  run: mkdir wheels/
-
+        
         - uses: actions/download-artifact@v3
+          with:
+              path: dists/
+
+        - run: mkdir wheels
+
+        - name: Copy to Target
+          run: cp -r dists/dist_*/. wheels/
+
         - name: Display structure of downloaded files
           run: ls -R
+          working-directory:  wheels/
