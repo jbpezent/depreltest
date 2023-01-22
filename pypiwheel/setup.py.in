@@ -42,6 +42,7 @@ def main():
         name = 'depreltest',
         version = '@PROJECT_VERSION@',
         description = """package_descr""",
+        long_description=""" WORDS """,
         packages=find_packages(),
         python_requires = pyversion,
        
