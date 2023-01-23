@@ -46,6 +46,8 @@ jobs:
       
       - name: Audit Wheel Test
         run:  auditwheel show build/pypiwheel/depreltest/dist/*.whl
+      - name: Audit Wheel Patch
+        run:  auditwheel repair --plat manylinux_2_31_x86_64 build/pypiwheel/depreltest/dist/*.whl
 
 
 
