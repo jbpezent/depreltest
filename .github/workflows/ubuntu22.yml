@@ -11,9 +11,9 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        platform: [ubuntu-22.04]
+        platform: [ubuntu-20.04]
         python-version: ["3.9","3.10"]
-        compiler: ["clang-13"]
+        compiler: ["clang-12"]
 
     runs-on: ${{ matrix.platform }}
 
