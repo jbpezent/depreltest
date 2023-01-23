@@ -9,6 +9,7 @@ set( CMAKE_MESSAGE_LOG_LEVEL "STATUS" )
 
 include(cmake/git-submodule-init.cmake)
 include(cmake/git-submodule-update.cmake)
+set(CMAKE_VERBOSE_MAKEFILE ON)
 
 
 ################################################################################
