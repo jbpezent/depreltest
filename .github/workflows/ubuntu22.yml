@@ -31,8 +31,12 @@ jobs:
           COMPILER: ${{ matrix.compiler }}
         run: bash $GITHUB_WORKSPACE/.github/install_ubuntu_dependencies.sh
 
+      - run: sudo apt-get install patchelf
+
       - name: Add python requirements
         run: python -m pip install --upgrade wheel setuptools && python -m pip install -r requirements.txt
+
+      - run: pip install auditwheel
 
       - name: "Create build directory and run CMake"
         run: cmake -S . -B build -G "Unix Makefiles" -DCMAKE_BUILD_TYPE=Release -DPIP_INSTALL=True
@@ -40,15 +44,25 @@ jobs:
       - name: "Build Project" 
         run: cmake --build build --target _depreltest pypiwheel --config Release -- -j1 
       
-      - name: 'Upload Artifact'
-        uses: actions/upload-artifact@v3
-        with:
-          name: dist ${{ matrix.python-version }} ${{ matrix.platform }}
-          path: build/pypiwheel/depreltest/dist
-          retention-days: 1
-      - name: Publish package to TestPyPI
-        uses: pypa/gh-action-pypi-publish@release/v1
-        with:
-          password: ${{ secrets.TEST_PYPI_API_TOKEN }}
-          repository_url: https://test.pypi.org/legacy/
-          packages_dir: build/pypiwheel/depreltest/dist
+      - name: Audit Wheel Test
+        run:  auditwheel show build/pypiwheel/depreltest/dist/*.whl
+
+
+
+
+
+
+      
+      #- name: 'upload artifact'
+      #  uses: actions/upload-artifact@v3
+      #  with:
+      #    name: dist ${{ matrix.python-version }} ${{ matrix.platform }}
+      #    path: build/pypiwheel/depreltest/dist
+      #    retention-days: 1
+
+      #- name: publish package to testpypi
+      #  uses: pypa/gh-action-pypi-publish@release/v1
+      #  with:
+      #    password: ${{ secrets.test_pypi_api_token }}
+      #    repository_url: https://test.pypi.org/legacy/
+      #    packages_dir: build/pypiwheel/depreltest/dist
