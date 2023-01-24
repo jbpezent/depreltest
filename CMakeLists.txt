@@ -53,7 +53,10 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 # Release Flags
 list(APPEND RELEASE_FLAGS "-O2")
-list(APPEND RELEASE_FLAGS "-march=native")
+list(APPEND RELEASE_FLAGS "-march=x86-64-v3")
+if(NOT WIN32)
+        list(APPEND RELEASE_FLAGS "-mtune=skylake")
+endif()
 
 if(WIN32)
      list(APPEND RELEASE_FLAGS "/MD")

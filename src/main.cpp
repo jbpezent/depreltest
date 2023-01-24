@@ -35,7 +35,9 @@ void SoftwareInfo() {
     else if (vsize == 8) vecversion = "AVX512 - 512 bit - 8 doubles";
 
     
-
+#ifdef __AVX2__
+    Is avx 2 being enabled ?????
+#endif
     
     
     
