@@ -51,7 +51,7 @@ jobs:
       - name: Install LLVM and Clang
         uses: KyleMayes/install-llvm-action@v1
         with:
-         version: "14.0"
+         version: "15.0"
       
       - uses: actions/checkout@v3
         with:
@@ -59,9 +59,9 @@ jobs:
       - uses: ilammy/msvc-dev-cmd@v1
         with:
           arch: x86_64
-      - name: install mkl
-        run: scripts/windowsoneapi_install.bat $WINDOWS_BASEKIT_URL $WINDOWS_CPP_COMPONENTS
-        shell: bash
+      #- name: install mkl
+      #  run: scripts/windowsoneapi_install.bat $WINDOWS_BASEKIT_URL $WINDOWS_CPP_COMPONENTS
+      #  shell: bash
 
       - uses: actions/setup-python@v3
         with:
